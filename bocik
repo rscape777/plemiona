@@ -1,0 +1,30 @@
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class MouseClicker {
+    public static void main(String[] args) throws Exception {
+        int desiredHour = 13; 
+        int desiredMin = 30; 
+        int desiredSec = 0;  
+        int desiredMs = 0;  
+
+        Calendar cal = new GregorianCalendar();
+        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+        int currentMin = cal.get(Calendar.MINUTE);
+        int currentSec = cal.get(Calendar.SECOND);
+        int currentMs = cal.get(Calendar.MILLISECOND);
+
+        int delayMs = ((desiredHour - currentHour) * 3600
+                + (desiredMin - currentMin) * 60
+                + (desiredSec - currentSec)) * 1000
+                + (desiredMs - currentMs);
+
+        Thread.sleep(delayMs);
+
+        Robot robot = new Robot();
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    }
+}
